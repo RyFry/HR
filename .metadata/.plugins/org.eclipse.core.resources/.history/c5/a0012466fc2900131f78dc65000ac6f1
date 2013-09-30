@@ -1,0 +1,6 @@
+THINGS TO GET FIXED:
+
+	-	Make City and Mines extend the Entity class to make the code cleaner
+	-	Make methods that City and Mines share (i.e. do the same thing, such as losing population) have the same name
+			This should just be making the method in Entity and not over-writing it
+			
