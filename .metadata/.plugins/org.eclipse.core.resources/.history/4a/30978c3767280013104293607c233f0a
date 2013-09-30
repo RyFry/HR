@@ -1,0 +1,7 @@
+package com.sisyphus;
+
+public class CommandProcesses {
+	public void processCommand() {
+		
+	}
+}

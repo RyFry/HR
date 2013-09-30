@@ -1,0 +1,14 @@
+package com.sisyphus;
+
+public class God {
+	
+	private static String message = "Hello, sir";
+	
+	public static String getMessage() {
+		return message;
+	}
+	
+	public static void setMessage(String newMessage) {
+		message = newMessage;
+	}
+}

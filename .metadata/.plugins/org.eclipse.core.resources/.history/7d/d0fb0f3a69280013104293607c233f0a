@@ -1,0 +1,51 @@
+package com.sisyphus;
+
+import java.util.ArrayList;
+
+public class Commands {	
+	
+	public String processCommand(ArrayList<String> commandArray, ArrayList<City> cities, ArrayList<Mines> mines) {
+		String expression = null;
+
+		if (commandArray.get(0).toLowerCase().equals("sacrifice")) {
+			processSacrifice(commandArray);
+		} else if (commandArray.get(0).toLowerCase().equals("transfer")) {
+			processTransfer(commandArray);
+		} else if (commandArray.get(0).toLowerCase().equals("build")) {
+			processBuild(commandArray);
+		} else if (commandArray.get(0).toLowerCase().equals("help")) {
+			processHelp(commandArray);
+		} else if (commandArray.get(0).toLowerCase().equals("quit")) {
+			processQuit();
+		} else {
+			expression = "Invalid Command";
+		}
+		
+		return expression;
+	}
+	
+	
+	private void processSacrifice(ArrayList<String> commandArray) {
+		
+	}
+
+
+	private void processTransfer(ArrayList<String> commandArray) {
+		
+	}
+
+
+	private void processBuild(ArrayList<String> commandArray) {
+		
+	}
+
+
+	private void processHelp(ArrayList<String> commandArray) {
+		
+	}
+
+
+	private void processQuit() {
+		Sisyphus.quit();
+	}
+}

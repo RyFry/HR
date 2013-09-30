@@ -1,0 +1,68 @@
+package com.sisyphus;
+
+import java.util.ArrayList;
+
+public class Commands {	
+	
+	public String processCommand(ArrayList<String> commandArray, ArrayList<City> cities, ArrayList<Mines> mines) {
+		String expression = null;
+
+		if (commandArray.get(i).toLowerCase().equals("sacrifice")) {
+			processSacrifice(commandArray);
+		} else if (commandArray.get(i).toLowerCase().equals("transfer")) {
+			processTransfer(commandArray);
+		} else if (commandArray.get(i).toLowerCase().equals("build")) {
+			processBuild(commandArray);
+		} else if (commandArray.get(i).toLowerCase().equals("help")) {
+			processHelp(commandArray);
+		} else if (commandArray.get(i).toLowerCase().equals("quit")) {
+			processQuit();
+		}	
+		
+		return expression;
+	}
+	
+	
+	private void processSacrifice(ArrayList<String> commandArray) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	private void processTransfer(ArrayList<String> commandArray) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	private void processBuild(ArrayList<String> commandArray) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	private void processHelp(ArrayList<String> commandArray) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	private void processQuit() {
+		Sisyphus.quit();
+	}
+
+
+	private class CommandTree {
+		
+		private CommandTree[] nextTree;
+		private int numBranches;
+		private String error;
+		private String message;
+		
+		public CommandTree(CommandTree[] nextTree, int numBranches, String error, String message) {
+			this.nextTree = nextTree;
+			this.numBranches = numBranches;
+			this.error = error;
+		}
+	}
+}

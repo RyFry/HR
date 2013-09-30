@@ -1,0 +1,288 @@
+package com.sisyphus;
+
+import java.util.ArrayList;
+import java.awt.Font;
+
+import org.lwjgl.opengl.DisplayMode;
+import org.newdawn.slick.*;
+
+public class Sisyphus extends BasicGame {
+	
+	private boolean FSFlag = false;
+	private boolean fullScreen = false;
+	private boolean musicOn = true;
+	private boolean toggleCursor = true;
+	
+	private static final String TITLE = "H.R.";
+	private static int WIDTH = 1280;
+	private static int HEIGHT = 600;
+	
+	private static AppGameContainer app;
+	private static Sound BGM;
+	private static Sound NewGameStart;
+	private static Sound ButtonPress;
+	
+	private static DisplayMode displayModes[] = {
+		new DisplayMode(640, 480),
+		new DisplayMode(800, 600),
+		new DisplayMode(1024, 768),
+		new DisplayMode(1280, 600),
+		new DisplayMode(1280, 720),
+		new DisplayMode(1366, 768),
+		new DisplayMode(1600, 900),
+		new DisplayMode(1920, 1080)
+	};
+	
+	private ArrayList<City> cities;
+	private ArrayList<Mines> mines;
+	
+	private String commandBuff = "";
+	
+	private static Image mainMenu;
+	private static Image sisyphus;
+	private static Image optionsMenu;
+	
+	private int cumTime = 0;
+	private int cityListY = 10;
+	private int mineListY = 10;
+	
+	private static Frames frame = Frames.MAIN;
+	
+	public Sisyphus() {
+		super(TITLE);
+	}
+	
+	public static void main(String [] args) throws SlickException {
+		try {
+			app = new AppGameContainer(new Sisyphus());
+			app.setDisplayMode(WIDTH, HEIGHT, false);
+			app.setShowFPS(false);
+			app.start();
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Make sound work again
+	public void init(GameContainer gc) throws SlickException {
+		BGM = new Sound("res/Fortune.ogg");
+		NewGameStart = new Sound("res/NewGameStart.ogg");
+		ButtonPress = new Sound("res/onClick.ogg");
+		mainMenu = new Image("assets/MainMenu.jpg");
+		sisyphus = new Image("assets/Sisyphus.jpg");
+		optionsMenu = new Image("assets/OptionsMenu.jpg");
+		
+		cities = new ArrayList<City>();
+		cities.add(new City("Armageddoville"));
+		
+		mines = new ArrayList<Mines>();
+		mines.add(new Mines("First Mine", 100));
+	}
+
+	public void render(GameContainer gc, Graphics g) throws SlickException {
+		
+		if(fullScreen == true) {
+			for (int k = displayModes.length - 1; k >= 0; k--) {
+				if (displayModes[k].isFullscreenCapable() && !FSFlag) {
+					app.setDisplayMode(displayModes[k].getWidth(), 
+									   displayModes[k].getHeight(), 
+								   	   false);
+					app.setFullscreen(true);
+					FSFlag = true;
+				}
+			}
+		} else {
+			app.setDisplayMode(WIDTH, HEIGHT, false);
+		}
+		
+		if(frame == Frames.MAIN){
+			mainRender(gc, g);
+		}
+		if(frame == Frames.NEWGAME){
+			newGameRender(gc, g);
+		}
+		if(frame == Frames.CREDITS){
+			creditsRender(gc, g);
+		}
+		if(frame == Frames.OPTIONS){
+			optionsRender(gc, g);
+		}
+	}
+
+	public void update(GameContainer gc, int delta) throws SlickException {		
+		if (frame == Frames.NEWGAME) {
+			cumTime += delta;
+			if (cumTime >= 2000) {
+				for (City city : cities) {
+					city.upKeep(GlobalConstants.RATE);
+					city.grow(GlobalConstants.RATE, GlobalConstants.MAX);
+				}
+				
+				cumTime = 0;
+			}
+			
+			if ((cumTime > 1000 && toggleCursor) || (cumTime < 1000 && !toggleCursor)) {
+				toggleCursor = !toggleCursor;
+			}
+		}
+		
+		if(musicOn == true){
+			if(frame == Frames.NEWGAME) {
+				
+			}else if(BGM.playing() == false){
+				BGM.loop();
+			}
+		}else if (musicOn == false){
+			BGM.stop();
+		}
+	}	
+	
+	public void mainRender(GameContainer gc, Graphics g){
+		mainMenu.draw(0, 0, mainMenu.getWidth() * .6667f, mainMenu.getHeight() * .5555f);
+/*		g.setColor(Color.white);
+		g.drawLine(170, 80, 170, 395);
+		g.drawLine(170, 110, WIDTH - 170, 110);
+		g.drawLine(WIDTH - 170, 80, WIDTH - 170, 395);
+		g.drawLine(0, 80, 170, 80);
+		g.drawLine(0, 230, 170, 230);
+		g.drawLine(0, 395, 170, 395);
+		g.drawLine(WIDTH, 80, WIDTH - 170, 80);
+		g.drawLine(WIDTH, 230, WIDTH - 170, 230);
+		g.drawLine(WIDTH, 395, WIDTH - 170, 395);
+*/
+	}
+	
+	public void newGameRender(GameContainer gc, Graphics g) {
+		g.setColor(Color.black);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		g.setColor(Color.white);
+		
+		sisyphus.draw(0, 0, sisyphus.getWidth() * .6667f, mainMenu.getHeight() * 0.5555f);
+		
+		if (toggleCursor) {
+			g.drawString(">> " + commandBuff + "|", 325, 575);
+		} else {
+			g.drawString(">> " + commandBuff, 325, 575);
+		}
+		
+		for (int i=0; i < cities.size(); i++) {
+			g.drawString(cities.get(i).getName() + "\n   population: " + cities.get(i).getLocalPop()+ 
+					"\n   rescources: " + cities.get(i).getLocalRes(),10, (i*60)+cityListY);
+		}
+
+		for (int i=0; i < mines.size(); i++) {
+			g.drawString(mines.get(i).getName() + "\n   population: " + 
+			mines.get(i).getLocalPop(), 1100, (i*40)+mineListY);
+		}
+		
+		g.drawRect(215, 10, 30, 30);
+		g.drawRect(215, 375, 30, 30);
+		g.drawRect(1035, 10, 30, 30);
+		g.drawRect(1035, 375, 30, 30);
+	}
+	
+	public void creditsRender(GameContainer gc,Graphics g) {
+		mainMenu.draw(0, 0, mainMenu.getWidth() * .6667f, mainMenu.getHeight() * .5555f);
+		String credits = "Team Lead: Ryan\n\nArt:Jeffrey\n\nAudio: Avi\n\nCoder: Barrett\n\nCoder: Prad";
+		mainMenu.draw(0, 0, mainMenu.getWidth() * .6667f, mainMenu.getHeight() * .5555f);
+		g.setColor(Color.black);
+		g.fillRect(0,0, WIDTH, HEIGHT);
+		g.setColor(Color.white);
+		g.drawString(credits, WIDTH/2-credits.length(), HEIGHT/2-credits.length());
+	}
+	
+	public void optionsRender(GameContainer gc,Graphics g) {
+		optionsMenu.draw(0, 0, optionsMenu.getWidth() * .6667f, optionsMenu.getHeight() * .5555f);
+	}
+	
+	public void mouseClicked(int button, int x, int y, int clickCount) {
+		//	New Game
+		if (frame == Frames.MAIN) {
+			if(x <= 540 && x >= 280 && y <= 560 && y >= 425) {
+				frame = Frames.NEWGAME;
+				BGM.stop();
+				NewGameStart.play();
+			} else if (x <= 1015 && x >= 730 && y <= 560 && y >= 425) {
+				frame = Frames.GAME;
+			} else if (x <= 420 && x >= 220 && y <= 300 && y >= 260) {
+				frame = Frames.OPTIONS;
+				ButtonPress.play();
+			} else if (x <= 1115 && x >= 855 && y <= 300 && y >= 260) {
+				frame = Frames.CREDITS;
+				ButtonPress.play();
+			}	
+		} else if (frame == Frames.OPTIONS) {
+			if(x >= 230 && x <= 300 && y >= 255 && y <= 295){
+				musicOn = true;
+				ButtonPress.play();
+			}else if(x >= 350 && x <= 430 && y >= 250 && y <= 300){
+				musicOn = false;
+				ButtonPress.play();
+			}else if(x >= 870 && x <= 1050 && y >= 200 && y <= 300){
+				ButtonPress.play();
+				if(fullScreen == true){
+					fullScreen = false;
+				} else {
+					fullScreen = true;
+				}
+			}
+		} if (frame == Frames.NEWGAME) {
+			if(x >= 215 && x <= 245 && y >= 10 && y <= 40){
+				cityListY -= 60;
+			}else if(x >= 215 && x <= 245 && y >= 375 && y <= 405){
+				cityListY += 60;
+			}else if(x >= 1035 && x <= 1065 && y >= 10 && y <= 40){
+				mineListY -= 40;
+			}else if(x >= 1035 && x <= 1065 && y >= 375 && y <= 405){
+				mineListY += 40;
+			}
+		} else if (frame == Frames.CREDITS) {
+		}
+	}
+	
+	public void keyPressed(int key, char c) {
+		if (key == Input.KEY_ESCAPE) {
+			app.exit();
+		}
+		
+		if (frame == Frames.NEWGAME) {
+			if (c >= 32 && c <= 126) {
+				commandBuff += c;
+			}
+			
+			if (key == Input.KEY_ENTER) {
+				String command = commandBuff;	
+				
+				ArrayList<String> commandSequence = Commands.parseCommand(command);
+//				Commands.processCommand(commandSequence, cities, mines);
+				//
+				//	need to process the command
+				//
+			
+				commandBuff = "";
+			}
+			
+			if (key == Input.KEY_BACK && !commandBuff.equals("")) {
+				commandBuff = commandBuff.substring(0, commandBuff.length() - 1);
+			}
+		}
+		
+		if(frame == Frames.OPTIONS || frame == Frames.CREDITS || frame == Frames.GAME){
+			if (key == Input.KEY_BACK) {
+				frame = Frames.MAIN;
+				ButtonPress.play();
+			}
+		}
+	}
+	
+	public void keyDown(int key, char c) {
+		if (frame == Frames.NEWGAME && key == Input.KEY_BACK) {
+			commandBuff = commandBuff.substring(0, commandBuff.length() - 1);
+		}
+	}
+	
+	public static void quit() {
+		frame = Frames.MAIN;
+	}
+}

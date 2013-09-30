@@ -1,0 +1,21 @@
+package com.sisyphus;
+
+import java.util.ArrayList;
+
+public class Commands {
+	private enum commandList {
+		SACRIFICE   ("sacrifice"),
+		TRANSFER 	("transfer"),
+		HELP 		("help");
+	
+	
+		private String command;
+		commandList (String command) {
+			this.command = command;
+		}
+		
+		public String getCommand() {
+			return command;
+		}
+	}
+}

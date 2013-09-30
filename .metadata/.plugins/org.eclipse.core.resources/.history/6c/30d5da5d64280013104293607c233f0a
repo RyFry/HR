@@ -1,0 +1,19 @@
+package com.sisyphus;
+
+import java.util.ArrayList;
+
+public class Commands {	
+	public void processCommand(ArrayList<String> commandArray) {
+		
+	}
+	
+	
+	private class CommandTree {
+		
+		private CommandTree nextTree;
+		
+		public CommandTree() {
+			
+		}
+	}
+}

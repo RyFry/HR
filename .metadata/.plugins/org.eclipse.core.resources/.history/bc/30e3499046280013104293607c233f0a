@@ -1,0 +1,17 @@
+package com.sisyphus;
+
+import java.util.ArrayList;
+
+public enum Commands {
+	SACRIFICE  ()
+	;
+	
+	private ArrayList<String> commands;
+	Commands (String... possible) {
+		commands = new ArrayList<String>();
+		
+		for (String str : possible) {
+			commands.add(str);
+		}
+	}
+}

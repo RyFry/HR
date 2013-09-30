@@ -1,0 +1,16 @@
+package com.sisyphus;
+
+public enum Frames {
+	MAIN (0),
+	GAME (1);
+	
+	
+	private int index;
+	Frames (int index) {
+		this.index = index;
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+}

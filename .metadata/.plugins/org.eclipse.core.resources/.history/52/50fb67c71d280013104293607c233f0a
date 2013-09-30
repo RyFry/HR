@@ -1,0 +1,21 @@
+package com.me.Sisyphus;
+
+public class Mines {
+	
+	public long resources=0;
+	public long localPop=0;
+	public long rGain(){
+		resources+=localPop;
+		return resources;
+	}
+	public long popLoss(){
+		localPop-=(localPop*(2.0/5.0));
+		return localPop;
+	}
+	public long transfer(City city){
+		long temp=resources;
+		resources=0;
+		city.gainRes(temp);
+		return temp;
+	}
+}

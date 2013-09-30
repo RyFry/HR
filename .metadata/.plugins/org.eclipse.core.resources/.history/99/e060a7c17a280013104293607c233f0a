@@ -1,0 +1,54 @@
+package com.sisyphus;
+
+public class Mines {
+	
+	private long resources = 0;
+	private long localPop = 0;
+	
+	private String name;
+	
+	public Mines(String name, long localPop) {
+		this.name = name;
+		this.localPop = localPop;
+	}	
+	
+	public long resGain() {
+		resources += localPop;
+		return resources;
+	}
+	
+	public long popLoss() {
+		localPop -= (localPop*(2.0/100.0));
+		return localPop;
+	}
+	
+	public long transfer(City city) {
+		long temp = resources;
+		resources = 0;
+		city.gainRes(temp);
+		return temp;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public long getLocalPop() {
+		return localPop;
+	}
+	
+	public void popEaten(long eaten) {
+		localPop -= eaten;
+	}
+	
+	public long transferPop(long loss) {
+		if (localPop - loss < 0) {
+			loss = localPop;
+			localPop = 0;
+			return loss;
+		}
+		
+		localPop -= loss;
+		return loss;
+	}
+}
