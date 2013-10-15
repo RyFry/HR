@@ -1,4 +1,4 @@
-package com.sisyphus;
+package com.hr;
 
 public class God {
 	static int hunger;

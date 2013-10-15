@@ -1,4 +1,4 @@
-package com.sisyphus;
+package com.hr;
 
 import java.util.ArrayList;
 import java.util.Random;

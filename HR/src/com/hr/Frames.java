@@ -1,4 +1,4 @@
-package com.sisyphus;
+package com.hr;
 
 public enum Frames {
 	MAIN,

@@ -1,4 +1,4 @@
-package com.sisyphus;
+package com.hr;
 
 public class GlobalConstants {
 	public static final int NUM_TAGS=0;
