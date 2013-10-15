@@ -1,11 +1,16 @@
-# ignore .metadata folder
-.metadata/
+# .metadata folder
+/.metadata/
 
-# ignore .git folder
-.git
+# .git folder
+.git/
 
-# ignore lib folder (shouldn't change anyway)
+# lib folder (shouldn't change anyway)
 lib/
 
-# ignore compiled java files
+# compiled java files
 *.class
+
+# Package Files
+*.jar
+*.war
+*.ear
