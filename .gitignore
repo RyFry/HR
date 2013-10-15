@@ -1,16 +1,29 @@
-# .metadata folder
-/.metadata/
+.metadata
+.git
+lib/**
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
 
-# .git folder
-.git/
+# External tool builders
+.externalToolBuilders/
 
-# lib folder (shouldn't change anyway)
-lib/
+# Locally stored "Eclipse launch configurations"
+*.launch
 
-# compiled java files
+# CDT-specific (I copied this from github)
+.cproject
+
+# PDT-specific
+.buildpath
+
+# class files
 *.class
-
-# Package Files
-*.jar
-*.war
-*.ear
