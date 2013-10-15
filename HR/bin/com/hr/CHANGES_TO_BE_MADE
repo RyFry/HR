@@ -1,0 +1,29 @@
+THINGS TO GET FIXED:
+	
+	Entities:
+		:: Create a superclass
+		- Determine variables and behaviors shared by all constructable entities like cities and mines.
+		- Write Entity abstract superclass which constructable objects will extend. 
+		- Rewrite existing constructable objects to extend completed Entity class.
+		
+	Documentation:
+		:: All files must be documented with comments to increase readability: all methods must have at least one line of header describing their purpose and parameters; variables and constants should have uniform naming conventions.
+		- Document Sisyphus.java
+		- Document Commands.java
+		- Document Frames.java
+		- Document God.java
+		- Document Mines.java
+		- Document Cities.java
+		- Document Entity.java
+		- Document GlobalConstants.java
+		
+	Modularity:
+		:: The algorithms running the game must be adjustable from a main control file. 
+		- Expand GlobalConstants.java file into designated control code; it will hold all the components of gameplay algoithm-equations so that they may be adujsted easily for testing and EASY/HARD mode features. Group constants together for readability and comment. 
+		- Overload Entity-inheriting classes' constructors to assign different rates of growth/decay/etc. depending on parameters passed. A lack of parameters should be taken to mean default rates. 
+		- 
+		- 
+	
+	Optimization:
+		:: Make code run quicker and more elegantly when possible.
+		- 
