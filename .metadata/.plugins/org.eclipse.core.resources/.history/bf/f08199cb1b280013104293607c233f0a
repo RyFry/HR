@@ -1,6 +1,0 @@
-package com.sisyphus;
-
-public enum Frames {
-	MAIN,
-	GAME;
-}

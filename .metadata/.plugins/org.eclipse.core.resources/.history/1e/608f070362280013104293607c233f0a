@@ -1,9 +1,0 @@
-package com.sisyphus;
-
-import java.util.TreeMap;
-
-public class CommandProcesses {
-	public void processCommand() {
-		
-	}
-}
