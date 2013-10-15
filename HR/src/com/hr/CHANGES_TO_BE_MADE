@@ -17,6 +17,9 @@ THINGS TO GET FIXED:
 		- Document Entity.java
 		- Document GlobalConstants.java
 		
+	Load Game:
+		:: Make 'Load Game' work
+		
 	Modularity:
 		:: The algorithms running the game must be adjustable from a main control file. 
 		- Expand GlobalConstants.java file into designated control code; it will hold all the components of gameplay algoithm-equations so that they may be adujsted easily for testing and EASY/HARD mode features. Group constants together for readability and comment. 

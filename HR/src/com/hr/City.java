@@ -4,19 +4,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class City {
-	
-	private static String[] cityNames = {"Sisyphus", "Ouroborus", "Fugue", "Chi-T", "Centurion",
-		 "Stargazer", "Aether", "Cralilea", "Hubble", "Nouus",
-		 "Pulsar", "Cepheid", "T-Tauri", "Nebulon", "Kepler"};
-	
+		
 	private long localPop;
 	private long localRes;
 	private String name;
-	private boolean[] tags = new boolean[GlobalConstants.NUM_TAGS];
+//	private boolean[] tags = new boolean[GC.NUM_TAGS];
 	
 	public City(ArrayList<City> names){
-		localPop = GlobalConstants.STARTING_POP;
-		localRes = GlobalConstants.STARTING_RES;
+		localPop = GC.STARTING_POP;
+		localRes = GC.STARTING_RES;
 		//tags=ptags;
 		name = getRandName(names);
 	}
@@ -25,18 +21,22 @@ public class City {
 		Random gen = new Random();
 		String sname;
 		ArrayList<String> names = new ArrayList<String>();
-		for(int i = 0; i < anames.size(); i++)
-			names.add(anames.get(i).getName()); 
-		do{
-			sname = cityNames[gen.nextInt(cityNames.length)];
-		} while(names.contains(sname));
+		
+		for(int i = 0; i < anames.size(); i++) {
+			names.add(anames.get(i).getName());
+		}
+		
+		do {
+			sname = GC.getCityNames()[gen.nextInt(GC.getCityNames().length)];
+		} while (names.contains(sname));
+		
 		names.add(sname);
 		return sname;
 	}
 
 	public long grow(long rate, long max){
 		if((10*localRes-localPop)>=0){
-			upKeep(GlobalConstants.RATE);
+			upKeep(GC.RATE);
 			localPop += (long)(rate*localPop*(1.0-(localPop)/max));
 			return localPop;
 		}

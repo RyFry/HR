@@ -258,15 +258,15 @@ public class Commands {
 			}
 		if(!validSource)
 			return commandArray.get(4) + " is not a city";
-		if(source.getLocalPop() < GlobalConstants.STARTING_POP / 2)
+		if(source.getLocalPop() < GC.STARTING_POP / 2)
 			return source.getName() + " does not have sufficient population to transfer";
-		if(source.getLocalRes() < 2*GlobalConstants.STARTING_RES * 0) //TODO change 2 to modular constant 
+		if(source.getLocalRes() < 2*GC.STARTING_RES * 0) //TODO change 2 to modular constant 
 			return source.getName() + " does not have sufficient resources to build";
 		if(commandArray.get(2).equals("city")){
 			City c = new City(cities);
 			cities.add(c);
-			source.transferPop(GlobalConstants.STARTING_POP);
-			source.transferRes(GlobalConstants.STARTING_RES*2);
+			source.transferPop(GC.STARTING_POP);
+			source.transferRes(GC.STARTING_RES*2);
 			return "The people of " + source.getName() + " built a new city, " + c.getName();
 		}
 		if(commandArray.get(2).equals("mine")){
@@ -280,10 +280,10 @@ public class Commands {
 	}
 
 	private static void processHelp() {
-		Sisyphus.help();
+		HR.help();
 	}
 
 	private static void processQuit() {
-		Sisyphus.quit();
+		HR.quit();
 	}
 }

@@ -5,11 +5,6 @@ import java.util.Random;
 
 public class Mines  {
 	
-	private static String[] mineNames = {"Core-Prime", "Polaris", "Eclipse-Crater", "Parallax", "Roche-Point",
-		 "Redshift", "Zenith-East", "Radius", "Mt-Xerxes", "Dezornn",
-		 "Axelis-Re", "Remmur", "Ilb", "West-Crave", "Bellmore-Surface",
-		 "Bellmore-Deep", "The-Vore", "Elysium", "The-Howling", "Ziz-Cumulus"};
-	
 	private long resources = 0;
 	private long localPop = 0;
 	
@@ -29,11 +24,13 @@ public class Mines  {
 		Random gen = new Random();
 		String sname;
 		ArrayList<String> names = new ArrayList<String>();
-		for(int i = 0; i < anames.size(); i++)
-			names.add(anames.get(i).getName()); 
-		do{
-			sname = mineNames[gen.nextInt(mineNames.length)];
-		}while(names.contains(sname));
+		for(int i = 0; i < anames.size(); i++) {
+			names.add(anames.get(i).getName());
+		}
+		
+		do {
+			sname = GC.getMineNames()[gen.nextInt(GC.getMineNames().length)];
+		} while (names.contains(sname));
 		names.add(sname);
 		return sname;
 	}
