@@ -1,6 +1,7 @@
 .metadata
 .git
 lib/**
+bin/**
 tmp/**
 tmp/**/*
 *.tmp
