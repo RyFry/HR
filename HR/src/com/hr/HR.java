@@ -180,13 +180,11 @@ public class HR extends BasicGame {
 	}
 
 	public void creditsRender(GameContainer gamec, Graphics g) {
-		GC.getMainMenu().draw(0, 
-				0, 
+		GC.getMainMenu().draw(0, 0, 
 				GC.getMainMenu().getWidth() * .6667f, 
 				GC.getMainMenu().getHeight() * .5555f);
 		String credits = "Team Lead: Ryan\n\nArt:Jeffrey\n\nAudio: Avi\n\nCoder: Barrett\n\nCoder: Prad";
-		GC.getMainMenu().draw(0, 
-				0, 
+		GC.getMainMenu().draw(0, 0, 
 				GC.getMainMenu().getWidth() * .6667f, 
 				GC.getMainMenu().getHeight() * .5555f);
 		g.setColor(Color.black);
@@ -196,8 +194,7 @@ public class HR extends BasicGame {
 	}
 
 	public void optionsRender(GameContainer gc,Graphics g) {
-		GC.getOptionsMenu().draw(0, 
-				0, 
+		GC.getOptionsMenu().draw(0, 0,
 				GC.getOptionsMenu().getWidth() * .6667f, 
 				GC.getOptionsMenu().getHeight() * .5555f);
 	}
@@ -263,8 +260,11 @@ public class HR extends BasicGame {
 	}
 
 	public void keyPressed(int key, char c) {
-		if (frame == Frames.HELP){
-			if(key == Input.KEY_ENTER){
+		/*
+		 * HELP Menu
+		 */
+		if (frame == Frames.HELP) {
+			if(key == Input.KEY_ENTER) {
 				frame = Frames.NEWGAME;
 				GC.getNewGameStart().play();
 				return;
@@ -274,7 +274,9 @@ public class HR extends BasicGame {
 		if (key == Input.KEY_ESCAPE) {
 			app.exit();
 		}
-
+		/*
+		 * GAME is being played
+		 */
 		if (frame == Frames.NEWGAME) {
 			//	allows every printable key to be pressed
 			if (c >= ' ' && c <= '~') {
@@ -294,7 +296,9 @@ public class HR extends BasicGame {
 				commandBuff = commandBuff.substring(0, commandBuff.length() - 1);
 			}
 		}
-
+		/*
+		 * OPTIONS Menu
+		 */
 		if(frame == Frames.OPTIONS || frame == Frames.CREDITS){
 			if (key == Input.KEY_BACK) {
 				frame = Frames.MAIN;
@@ -302,11 +306,17 @@ public class HR extends BasicGame {
 			}
 		}
 	}
-
+	
+	/**
+	 * Quits the game, and returns to the main menu
+	 */
 	public static void quit() {
 		frame = Frames.MAIN;
 	}
 
+	/**
+	 * Goes to the help menu
+	 */
 	public static void help() {
 		frame = Frames.HELP;
 	}

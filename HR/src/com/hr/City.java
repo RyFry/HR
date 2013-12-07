@@ -17,7 +17,7 @@ public class City {
 		name = getRandName(names);
 	}
 	
-	private String getRandName(ArrayList<City> anames){
+	private String getRandName(ArrayList<City> anames) {
 		Random gen = new Random();
 		String sname;
 		ArrayList<String> names = new ArrayList<String>();
@@ -34,13 +34,13 @@ public class City {
 		return sname;
 	}
 
-	public long grow(long rate, long max){
-		if((10*localRes-localPop)>=0){
+	public long grow(long rate, long max) {
+		if ((10*localRes-localPop)>=0) {
 			upKeep(GC.RATE);
 			localPop += (long)(rate*localPop*(1.0-(localPop)/max));
 			return localPop;
 		}
-		else{
+		else {
 			localPop -= localPop*(2.0/100.0);
 			return localPop;
 		}

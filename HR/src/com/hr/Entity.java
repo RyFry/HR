@@ -2,8 +2,7 @@ package com.hr;
 
 import java.util.ArrayList;
 
-public class Entity {
-	
+public abstract class Entity {
 	protected long localPop;
 	protected String name;
 	

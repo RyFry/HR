@@ -19,7 +19,7 @@ public class Commands {
 	 * 		format: "help"
 	 * 
 	 *
-	 * OUIT
+	 * QUIT
 	 * Saves data and returns player to main menu. TODO Add multiple saved games.
 	 * 		format: "quit"
 	 * 
