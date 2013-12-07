@@ -1,2 +1,0 @@
-This is a file to see if git will let me add a new directory to the project
-
